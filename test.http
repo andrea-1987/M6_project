@@ -1,0 +1,69 @@
+// ---books----\\
+GET http://localhost:3030/books
+
+####
+POST http://localhost:3030/books/createBook
+Content-Type: application/json
+
+{
+    "title": "Il signore degli anelli ( Il ritorno del Re)",
+    "price": 33,
+    "category": "fantasy"
+}
+
+
+####
+GET http://localhost:3030/books/6600579152a52b8ec763cea9
+
+####
+PATCH http://localhost:3030/books/update/6600579152a52b8ec763cea9
+Content-Type: application/json
+
+{
+    "price":37
+}
+
+
+####
+DELETE http://localhost:3030/books/delete/660056d652a52b8ec763cea6
+
+//--Users--\\
+
+####
+GET http://localhost:3030/users
+
+####
+POST http://localhost:3030/createUser
+Content-Type: application/json
+
+{
+    "firstName": "Andrea",
+    "lastName" : "Frabotta",
+    "email": "io.mestesso@hotmail.com",
+    "password":"gojoforever",
+    "age":35
+}
+####
+GET http://localhost:3030/users/660d1ed94e95220204b6481a
+
+####
+PATCH http://localhost:3030/users/update/660d48c549ee25a0e7291095
+Content-Type: application/json
+
+{
+    "password":"sonoiopd"
+}
+
+####
+DELETE http://localhost:3030/users/delete/66008f8f63f8d07af8bf2bba
+
+//--login--\\
+
+####
+POST http://localhost:3030/login
+Content-Type: application/json
+
+{
+    "email":"io.mestesso@hotmail.com",
+    "password": "gojoforever"
+}
