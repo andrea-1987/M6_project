@@ -2,7 +2,7 @@ const BookModel=require("../models/books")
 const upload = require("../middlewares/multer")
 const cloudUpload = require("../middlewares/cloudinary");
 
-
+//with cloudinary upload\\
 exports.cloudUploadBooks=async(req,res)=>{
     try {
         res.status(200).json({source:req.file.path})
@@ -14,6 +14,7 @@ exports.cloudUploadBooks=async(req,res)=>{
     }
 }
 
+//--to upload in localstorage--\\
 exports.uploadBooks=async(req,res)=>{
     const url= req.protocol + `://` + req.get(`host`);
     try {

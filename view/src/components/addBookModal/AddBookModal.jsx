@@ -28,9 +28,13 @@ const AddBookModal = () => {
                 method: 'POST',
                 body: fileData
             })
+            if(response.ok){
             return await response.json()
+            }else{
+                throw new Error("Somethinks wrong!")
+            }
         } catch (e) {
-            console.log(e.message)
+            alert("Upload file failed",e.message)
         }
     }
 
@@ -52,8 +56,10 @@ const AddBookModal = () => {
                 })
                 return await response.json()
             } catch (e) {
-                console.log(e.message)
+                alert("Submit book failed",e.message)
             }
+        }else{
+            throw new Error ("Somethinks wrong!")
         }
     }
 

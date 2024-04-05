@@ -22,8 +22,12 @@ const MainContent = () => {
                     "authorization": session
                 }
             })
-            const data = await response.json()
-            setBooks(data)
+            if(response.ok){
+                const data = await response.json()
+                setBooks(data)
+            }else{
+                throw new Error("Somethinks wrong!")
+            }
         } catch (e) {
             setError(e.message)
         } finally {

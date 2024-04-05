@@ -1,37 +1,40 @@
-import React, {useState} from 'react';
-import AxiosClient from "../../client/client";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from 'react'
+import AxiosClient from '../../client/client'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm = ({ toggleForm }) => {
     const [formData, setFormData] = useState({})
 
-    const client = new AxiosClient();
+    const client = new AxiosClient()
     const navigate = useNavigate()
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        const response = await client.post('/login', formData)
-        console.log(response.token)
-        if (response.token) {
-            localStorage.setItem('auth', JSON.stringify(response.token))
-            setTimeout(() => {
-                navigate('/home')
-            },1500)
+        try {
+            const response = await client.post('/login', formData)
+            console.log(response.token)
+            if (response.token) {
+                localStorage.setItem('auth', JSON.stringify(response.token))
+                setTimeout(() => {
+                    navigate('/home')
+                }, 1500)
+            } else {
+                throw new Error('Somthinks wrong!')
+            }
+        } catch (error) {
+            alert("Fail to login",error)
         }
     }
     const onChangeInput = (e) => {
-        const {name, value} = e.target
+        const { name, value } = e.target
         setFormData({
             ...formData,
-            [name]: value
+            [name]: value,
         })
-
     }
 
     return (
-        <form
-            onSubmit={onSubmit}
-            className="card-body cardbody-color p-lg-5">
+        <form onSubmit={onSubmit} className="card-body cardbody-color p-lg-5">
             <div className="text-center">
                 <img
                     src="https://picsum.photos/340/340"
@@ -77,12 +80,12 @@ const LoginForm = ({ toggleForm }) => {
                 className="form-text text-center mb-5 text-dark"
             >
                 Non sei registrato?
-                <a href="#" className="text-dark fw-bold ms-1">
+                <a href=" " className="text-dark fw-bold ms-1">
                     Registrati ora!
                 </a>
             </div>
         </form>
-    );
-};
+    )
+}
 
-export default LoginForm;
+export default LoginForm

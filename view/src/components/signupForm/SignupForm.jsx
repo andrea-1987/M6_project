@@ -16,15 +16,20 @@ const SignupForm = ({ toggleForm }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
-            return await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/createUser`, {
+            const response=await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/createUser`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(signupFormData)
             })
+            if (response.ok){
+                return await response.json()
+            }else{
+                throw new Error("Somethinks  wrong!")
+            }
         } catch (e) {
-            console.log(e)
+            alert("Error to create user",e.message)
         }
     }
 
@@ -111,7 +116,7 @@ const SignupForm = ({ toggleForm }) => {
                 className="form-text text-center mb-5 text-dark"
             >
                 Sei già registrato?
-                <a href="#" className="text-dark fw-bold ms-1">
+                <a href=" " className="text-dark fw-bold ms-1">
                     Effettua il login!
                 </a>
             </div>
